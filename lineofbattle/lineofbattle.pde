@@ -1,5 +1,6 @@
 void setup() {
   size( 800, 600 );
+  frameRate( 60 );
   ellipseMode( CENTER );
   smooth();
 }
