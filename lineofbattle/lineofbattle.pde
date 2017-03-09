@@ -26,8 +26,8 @@ void draw() {
     case BATTLE:
       moveEnemies();
       allies.draw();
-      // move allies' shells
-      // move enemies' shells
+      moveAlliesShells();
+      moveEnemiesShells();
       // calculate collision
       // calculate camera position
       // draw background
@@ -50,6 +50,11 @@ void moveEnemies() {
 
 void moveAlliesShells() {
   for ( Shell s : alliesShells ) {
+    s.move();
+  }
+}
+void moveEnemiesShells() {
+  for ( Shell s : EnemiesShells ) {
     s.move();
   }
 }
