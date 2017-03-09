@@ -1,12 +1,17 @@
 void setup() {
-  size( 1200, 900, P3D );
+  size( 800, 600 );
+  ellipseMode( CENTER );
+  smooth();
 }
 
 void draw() {
+  background( 0 );
   // move enemies
   // move allies
   // move allies' shells
   // move enemies' shells
+  // calculate collision
+  // calculate camera position
   // draw background
   // draw enemies
   // draw allies
