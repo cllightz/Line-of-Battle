@@ -25,4 +25,9 @@ class Shell {
       ellipse( 0, 0, 1, 1 );
     popMatrix();
   }
+  
+  void move() {
+    x += vx;
+    y += vy;
+  }
 }

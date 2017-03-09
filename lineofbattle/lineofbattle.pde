@@ -47,3 +47,9 @@ void moveEnemies() {
     // u.move();
   }
 }
+
+void moveAlliesShells() {
+  for ( Shell s : alliesShells ) {
+    s.move();
+  }
+}
