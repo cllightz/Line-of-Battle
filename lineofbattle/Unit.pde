@@ -1,12 +1,10 @@
 class Unit {
-  public float x;
-  public float y;
+  public PVector pos;
   public float size;
   public color c;
   
-  Unit( float X, float Y, float SIZE, color C ) {
-    x = X;
-    y = Y;
+  Unit( PVector POS, float SIZE, color C ) {
+    pos = POS;
     size = SIZE;
     c = C;
   }
@@ -16,7 +14,7 @@ class Unit {
     noStroke();
     
     pushMatrix();
-      translate( x, y );
+      translate( pos.x, pos.y );
       scale( size );
       ellipse( 0, 0, 1, 1 );
     popMatrix();

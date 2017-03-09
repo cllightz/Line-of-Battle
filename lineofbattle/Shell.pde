@@ -1,16 +1,12 @@
 class Shell {
-  public float x;
-  public float y;
-  public float vx;
-  public float vy;
+  public PVector pos;
+  public PVector v;
   public float size;
   public color c;
   
-  Shell( float X, float Y, float VX, float VY, float SIZE, color C ) {
-    x = X;
-    y = Y;
-    vx = VX;
-    vy = VY;
+  Shell( PVector POS, PVector V, float SIZE, color C ) {
+    pos = POS;
+    v = V;
     size = SIZE;
     c = C;
   }
@@ -20,14 +16,13 @@ class Shell {
     noStroke();
     
     pushMatrix();
-      translate( x, y );
+      translate( pos.x, pos.y );
       scale( size );
       ellipse( 0, 0, 1, 1 );
     popMatrix();
   }
   
   void move() {
-    x += vx;
-    y += vy;
+    pos.add( v );
   }
 }

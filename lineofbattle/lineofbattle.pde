@@ -13,7 +13,7 @@ void setup() {
   scheneState = ScheneState.TITLE;
 
   allies = new AlliesLine();
-  allies.addUnit( new Unit( 100, 100, 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( 100, 100 ), 10, color( 0, 255, 0 ) ) );
   
   enemies = new ArrayList<Unit>();
   alliesShells = new ArrayList<Shell>();
@@ -60,14 +60,12 @@ void moveEnemies() {
 void shoot() {
   if ( mousePressed ) {
     for ( Unit u : allies.getUnits() ) {
-      float x = u.x;
-      float y = u.y;
-      float v = 2.0;
-      float vx = 0;
-      float vy = 0;
+      PVector pos = u.pos;
+      float vmax = 2.0;
+      PVector v = new PVector( 0, 0 );
       color c = color( 0, 255, 255 );
       
-      alliesShells.add( new Shell( x, y, vx, vy, 5.0, c ) );
+      alliesShells.add( new Shell( pos, v, 5.0, c ) );
     }
   }
 }
