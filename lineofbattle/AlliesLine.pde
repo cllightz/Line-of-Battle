@@ -9,6 +9,12 @@ class AlliesLine {
     units.add( u );
   }
   
+  public void move( KeyManager keyManager ) {
+    if ( keyPressed ) {
+      
+    }
+  }
+  
   public void draw() {
     for ( Unit u : units ) {
       u.draw();

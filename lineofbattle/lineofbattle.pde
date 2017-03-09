@@ -3,6 +3,7 @@ AlliesLine allies;
 ArrayList<Unit> enemies;
 ArrayList<Shell> alliesShells;
 ArrayList<Shell> enemiesShells;
+KeyManager keyManager;
 long frame;
 
 void setup() {
@@ -20,6 +21,8 @@ void setup() {
   alliesShells = new ArrayList<Shell>();
   enemiesShells = new ArrayList<Shell>();
   
+  keyManager = new KeyManager();
+  
   frame = 0;
 }
 
@@ -33,7 +36,7 @@ void draw() {
       
     case BATTLE:
       moveEnemies();
-      allies.draw();
+      allies.move( keyManager );
       moveAlliesShells();
       moveEnemiesShells();
       shoot();
@@ -110,6 +113,14 @@ void moveEnemiesShells() {
   for ( Shell s : enemiesShells ) {
     s.move();
   }
+  
+  for ( int i = enemiesShells.size() - 1; 0 <= i; i-- ) {
+    PVector screen = localToScreen( enemiesShells.get( i ).pos );
+    
+    if ( screen.x < -100 || width+100 < screen.x || screen.y < -100 || height+100 < screen.y ) {
+      enemiesShells.remove( i );
+    }
+  }
 }
 
 void calculateAlliesShellsCollision() {
@@ -155,4 +166,12 @@ PVector localToScreen( PVector local ) {
   PVector screen = new PVector();
   tmp.mult( local, screen );
   return screen;
+}
+
+void keyPressed() {
+  keyManager.enable( key );
+}
+
+void keyReleased() {
+  keyManager.disable( key );
 }
