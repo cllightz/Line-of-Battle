@@ -11,8 +11,13 @@ void setup() {
   smooth();
   
   scheneState = ScheneState.TITLE;
+
   allies = new AlliesLine();
   allies.addUnit( new Unit( 100, 100, 10, color( 0, 255, 0 ) ) );
+  
+  enemies = new ArrayList<Unit>();
+  alliesShells = new ArrayList<Shell>();
+  enemiesShells = new ArrayList<Shell>();
 }
 
 void draw() {
@@ -43,9 +48,11 @@ void draw() {
 }
 
 void moveEnemies() {
+  /*
   for ( Unit u : enemies ) {
-    // u.move();
+    u.move();
   }
+  */
 }
 
 void moveAlliesShells() {
@@ -54,7 +61,7 @@ void moveAlliesShells() {
   }
 }
 void moveEnemiesShells() {
-  for ( Shell s : EnemiesShells ) {
+  for ( Shell s : enemiesShells ) {
     s.move();
   }
 }
