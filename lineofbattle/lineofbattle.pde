@@ -14,7 +14,7 @@ void setup() {
   scheneState = ScheneState.TITLE;
 
   allies = new AlliesLine();
-  allies.addUnit( new Unit( new PVector( 100, 100 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
   
   enemies = new ArrayList<Unit>();
   alliesShells = new ArrayList<Shell>();
@@ -96,6 +96,14 @@ void moveAlliesShells() {
   for ( Shell s : alliesShells ) {
     s.move();
   }
+  
+  for ( int i = alliesShells.size() - 1; 0 <= i; i-- ) {
+    PVector screen = localToScreen( alliesShells.get( i ).pos );
+    
+    if ( screen.x < -100 || width+100 < screen.x || screen.y < -100 || height+100 < screen.y ) {
+      alliesShells.remove( i );
+    }
+  }
 }
 
 void moveEnemiesShells() {
@@ -137,4 +145,14 @@ PVector screenToLocal( PVector screen ) {
   tmp.mult( screen, local );
   
   return local;
+}
+
+PVector localToScreen( PVector local ) {
+  PMatrix2D tmp = new PMatrix2D();
+  getMatrix( tmp );  
+  tmp.invert();
+  
+  PVector screen = new PVector();
+  tmp.mult( local, screen );
+  return screen;
 }
