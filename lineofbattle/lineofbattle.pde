@@ -21,8 +21,6 @@ void setup() {
 }
 
 void draw() {
-  background( 0 );
-  
   switch ( scheneState ) {
     case TITLE:
       new Title().drawTitle();
@@ -33,13 +31,17 @@ void draw() {
       allies.draw();
       moveAlliesShells();
       moveEnemiesShells();
-      // calculate collision
-      // calculate camera position
-      // draw background
-      // draw enemies
-      // draw allies
-      // draw allies' shells
-      // draw enemies' shells
+      calculateAlliesShellsCollision();
+      calculateEnemiesShellsCollision();
+      
+      pushMatrix();
+        // calculate camera position
+        background( 0 );
+        drawEnemies();
+        drawAllies();
+        drawAlliesShells();
+        drawEnemiesShells();
+      popMatrix();
       break;
       
     case RESULT:
@@ -48,11 +50,9 @@ void draw() {
 }
 
 void moveEnemies() {
-  /*
   for ( Unit u : enemies ) {
-    u.move();
+    // u.move();
   }
-  */
 }
 
 void moveAlliesShells() {
@@ -60,8 +60,39 @@ void moveAlliesShells() {
     s.move();
   }
 }
+
 void moveEnemiesShells() {
   for ( Shell s : enemiesShells ) {
     s.move();
+  }
+}
+
+void calculateAlliesShellsCollision() {
+}
+
+void calculateEnemiesShellsCollision() {
+}
+
+void drawEnemies() {
+  for ( Unit u : enemies ) {
+    u.draw();
+  }
+}
+
+void drawAllies() {
+  for ( Unit u : allies ) {
+    u.draw();
+  }
+}
+
+void drawAlliesShells() {
+  for ( Shell s : alliesShells ) {
+    s.draw();
+  }
+}
+
+void drawEnemiesShells() {
+  for ( Shell s : enemiesShells ) {
+    s.draw();
   }
 }
