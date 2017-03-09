@@ -11,7 +11,7 @@ class KeyManager {
     d = false;
   }
   
-  void enable( char k ) {
+  public void enable( char k ) {
     switch ( k ) {
       case 'w':
       case 'W':
@@ -35,7 +35,7 @@ class KeyManager {
     }
   }
   
-  void disable( char k ) {
+  public void disable( char k ) {
     switch ( k ) {
       case 'w':
       case 'W':
@@ -59,9 +59,13 @@ class KeyManager {
     }
   }
   
-  PVector getVector() {
+  public PVector getVector() {
     float x = (a?-1:0) + (d?1:0);
     float y = (w?-1:0) + (s?1:0);
     return new PVector( x, y ).normalize();
+  }
+  
+  public boolean isAnyPushed() {
+    return w || a || s || d;
   }
 }

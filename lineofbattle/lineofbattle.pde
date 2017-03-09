@@ -16,6 +16,19 @@ void setup() {
 
   allies = new AlliesLine();
   allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
+  allies.addUnit( new Unit( new PVector( width/2, height/2 ), 10, color( 0, 255, 0 ) ) );
   
   enemies = new ArrayList<Unit>();
   alliesShells = new ArrayList<Shell>();
@@ -51,21 +64,6 @@ void draw() {
         drawEnemiesShells();
       popMatrix();
       
-      color textColor = color( 255, 255, 255 );
-      fill( textColor );
-      
-      int textSize = 10;
-      textSize( textSize );
-      
-      textAlign( CENTER );
-      
-      pushMatrix();
-        translate( width/2, height/2 - 50 );
-        scale( 5 );
-        String text = Integer.toString( 20000 + (keyManager.w?1000:0) + (keyManager.a?100:0) + (keyManager.s?10:0) + (keyManager.d?1:0) );
-        text( text, 0, 0 );
-      popMatrix();
-      
       frame++;
       break;
       
@@ -86,7 +84,7 @@ void shoot() {
       PVector pos = new PVector( u.pos.x, u.pos.y );
       PVector cursor = new PVector( mouseX, mouseY );
       // PVector cursor = screenToLocal( new PVector( mouseX, mouseY ) );
-      float vmax = 2.0;
+      float vmax = 5.0;
       PVector v = PVector.sub( cursor, pos ).normalize().mult( vmax );
       color c = color( 0, 255, 255 );
       

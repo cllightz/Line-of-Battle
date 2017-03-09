@@ -10,9 +10,13 @@ class AlliesLine {
   }
   
   public void move( KeyManager keyManager ) {
-    if ( keyPressed ) {
-      if ( ! units.isEmpty() ) {
-        units.get( 0 ).pos.add( keyManager.getVector().mult( 1 ) );
+    if ( ! units.isEmpty() && keyManager.isAnyPushed() ) {
+      units.get( 0 ).moveV( keyManager.getVector().mult( 2.0 ) );
+      
+      for ( int i = 1; i < units.size(); i++ ) {
+        if ( units.get( i - 1 ).hasFollowPos() ) {
+          units.get( i ).move( units.get( i - 1 ).getFollowPos() );
+        }
       }
     }
   }

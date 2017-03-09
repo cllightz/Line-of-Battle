@@ -11,7 +11,11 @@ class Shell {
     c = C;
   }
   
-  void draw() {
+  public void move() {
+    pos.add( v );
+  }
+  
+  public void draw() {
     fill( c );
     noStroke();
     
@@ -20,9 +24,5 @@ class Shell {
       scale( size );
       ellipse( 0, 0, 1, 1 );
     popMatrix();
-  }
-  
-  void move() {
-    pos.add( v );
   }
 }
