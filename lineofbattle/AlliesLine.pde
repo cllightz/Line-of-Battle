@@ -14,4 +14,8 @@ class AlliesLine {
       u.draw();
     }
   }
+  
+  public ArrayList<Unit> getUnits() {
+    return units;
+  }
 }

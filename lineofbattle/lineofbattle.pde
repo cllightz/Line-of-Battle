@@ -21,6 +21,8 @@ void setup() {
 }
 
 void draw() {
+  background( 0 );
+  
   switch ( scheneState ) {
     case TITLE:
       new Title().drawTitle();
@@ -31,14 +33,14 @@ void draw() {
       allies.draw();
       moveAlliesShells();
       moveEnemiesShells();
+      shoot();
       calculateAlliesShellsCollision();
       calculateEnemiesShellsCollision();
       
       pushMatrix();
         // calculate camera position
-        background( 0 );
         drawEnemies();
-        drawAllies();
+        allies.draw();
         drawAlliesShells();
         drawEnemiesShells();
       popMatrix();
@@ -52,6 +54,21 @@ void draw() {
 void moveEnemies() {
   for ( Unit u : enemies ) {
     // u.move();
+  }
+}
+
+void shoot() {
+  if ( mousePressed ) {
+    for ( Unit u : allies.getUnits() ) {
+      float x = u.x;
+      float y = u.y;
+      float v = 2.0;
+      float vx = 0;
+      float vy = 0;
+      color c = color( 0, 255, 255 );
+      
+      alliesShells.add( new Shell( x, y, vx, vy, 5.0, c ) );
+    }
   }
 }
 
@@ -79,12 +96,6 @@ void drawEnemies() {
   }
 }
 
-void drawAllies() {
-  for ( Unit u : allies ) {
-    u.draw();
-  }
-}
-
 void drawAlliesShells() {
   for ( Shell s : alliesShells ) {
     s.draw();
@@ -95,4 +106,15 @@ void drawEnemiesShells() {
   for ( Shell s : enemiesShells ) {
     s.draw();
   }
+}
+
+PVector screenToLocal( PVector screen ) {
+  PMatrix2D tmp = new PMatrix2D();
+  getMatrix( tmp );
+  tmp.invert();
+  
+  PVector local = new PVector();
+  tmp.mult( screen, local );
+  
+  return local;
 }
