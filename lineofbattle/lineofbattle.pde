@@ -3,6 +3,7 @@ AlliesLine allies;
 ArrayList<Unit> enemies;
 ArrayList<Shell> alliesShells;
 ArrayList<Shell> enemiesShells;
+long frame;
 
 void setup() {
   size( 800, 600 );
@@ -18,6 +19,8 @@ void setup() {
   enemies = new ArrayList<Unit>();
   alliesShells = new ArrayList<Shell>();
   enemiesShells = new ArrayList<Shell>();
+  
+  frame = 0;
 }
 
 void draw() {
@@ -44,6 +47,23 @@ void draw() {
         drawAlliesShells();
         drawEnemiesShells();
       popMatrix();
+      
+      color textColor = color( 255, 255, 255 );
+      fill( textColor );
+      
+      int textSize = 10;
+      textSize( textSize );
+      
+      textAlign( CENTER );
+      
+      pushMatrix();
+        translate( width/2, height/2 - 50 );
+        scale( 5 );
+        String text = Integer.toString( alliesShells.size() );
+        text( text, 0, 0 );
+      popMatrix();
+      
+      frame++;
       break;
       
     case RESULT:
@@ -58,11 +78,13 @@ void moveEnemies() {
 }
 
 void shoot() {
-  if ( mousePressed ) {
+  if ( mousePressed && frame % 10 == 0 ) {
     for ( Unit u : allies.getUnits() ) {
-      PVector pos = u.pos;
+      PVector pos = new PVector( u.pos.x, u.pos.y );
+      PVector cursor = new PVector( mouseX, mouseY );
+      // PVector cursor = screenToLocal( new PVector( mouseX, mouseY ) );
       float vmax = 2.0;
-      PVector v = new PVector( 0, 0 );
+      PVector v = PVector.sub( cursor, pos ).normalize().mult( vmax );
       color c = color( 0, 255, 255 );
       
       alliesShells.add( new Shell( pos, v, 5.0, c ) );
