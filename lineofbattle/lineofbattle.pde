@@ -1,6 +1,6 @@
 ScheneState scheneState;
-AlliesLine alliesLine;
-ArrayList<Unit> enemiesUnits;
+AlliesLine allies;
+ArrayList<Unit> enemies;
 ArrayList<Shell> alliesShells;
 ArrayList<Shell> enemiesShells;
 
@@ -11,8 +11,8 @@ void setup() {
   smooth();
   
   scheneState = ScheneState.TITLE;
-  alliesLine = new AlliesLine();
-  alliesLine.addUnit( new Unit( 100, 100, 10, color( 0, 255, 0 ) ) );
+  allies = new AlliesLine();
+  allies.addUnit( new Unit( 100, 100, 10, color( 0, 255, 0 ) ) );
 }
 
 void draw() {
@@ -24,8 +24,8 @@ void draw() {
       break;
       
     case BATTLE:
-      // move enemies
-      alliesLine.draw();
+      moveEnemies();
+      allies.draw();
       // move allies' shells
       // move enemies' shells
       // calculate collision
@@ -39,5 +39,11 @@ void draw() {
       
     case RESULT:
       break;
+  }
+}
+
+void moveEnemies() {
+  for ( Unit u : enemies ) {
+    // u.move();
   }
 }
