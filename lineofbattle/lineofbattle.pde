@@ -62,7 +62,7 @@ void draw() {
       pushMatrix();
         translate( width/2, height/2 - 50 );
         scale( 5 );
-        String text = Integer.toString( alliesShells.size() );
+        String text = Integer.toString( 20000 + (keyManager.w?1000:0) + (keyManager.a?100:0) + (keyManager.s?10:0) + (keyManager.d?1:0) );
         text( text, 0, 0 );
       popMatrix();
       
