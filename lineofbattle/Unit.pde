@@ -23,23 +23,6 @@ class Unit {
   }
   
   public boolean hasFollowPos() {
-    /*
-    color textColor = color( 255, 255, 255 );
-    fill( textColor );
-    
-    int textSize = 10;
-    textSize( textSize );
-    
-    textAlign( CENTER );
-    
-    pushMatrix();
-      translate( width/2, height/2 - 50 );
-      scale( 5 );
-      String text = posHistory.size() >= historySize ? "T" : "_";
-      text( text, 0, 0 );
-    popMatrix();
-    */
-      
     return posHistory.size() >= historySize;
   }
   

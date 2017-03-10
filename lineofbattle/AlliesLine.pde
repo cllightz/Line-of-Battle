@@ -14,7 +14,7 @@ class AlliesLine {
   }
   
   public void move( KeyManager keyManager ) {
-    if ( ! units.isEmpty() && keyManager.isAnyPushed() ) {
+    if ( ! units.isEmpty() && keyManager.isAnyPressed() ) {
       units.get( 0 ).moveV( keyManager.getVector().mult( 2.0 ) );
       
       for ( int i = 1; i < units.size(); i++ ) {

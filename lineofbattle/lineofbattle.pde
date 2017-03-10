@@ -4,6 +4,7 @@ ArrayList<Unit> enemies;
 ArrayList<Shell> alliesShells;
 ArrayList<Shell> enemiesShells;
 KeyManager keyManager;
+MouseManager mouseManager;
 long frame;
 
 void setup() {
@@ -35,6 +36,7 @@ void setup() {
   enemiesShells = new ArrayList<Shell>();
   
   keyManager = new KeyManager();
+  mouseManager = new MouseManager();
   
   frame = 0;
 }
@@ -79,15 +81,42 @@ void moveEnemies() {
 }
 
 void shoot() {
-  if ( mousePressed && frame % 10 == 0 ) {
+  if ( mouseManager.isAnyPressed() && frame % 10 == 0 ) {
     for ( Unit u : allies.getUnits() ) {
       PVector pos = new PVector( u.pos.x, u.pos.y );
       PVector cursor = new PVector( mouseX, mouseY );
       // PVector cursor = screenToLocal( new PVector( mouseX, mouseY ) );
       float vmax = 5.0;
-      PVector v = PVector.sub( cursor, pos ).normalize().mult( vmax );
-      color c = color( 0, 255, 255 );
+      PVector v;
       
+      /*
+      color textColor = color( 255, 255, 255 );
+      fill( textColor );
+      
+      int textSize = 10;
+      textSize( textSize );
+      
+      textAlign( CENTER );
+      
+      pushMatrix();
+        translate( width/2, height/2 - 50 );
+        scale( 5 );
+        String text = Integer.toString( 20000 + (mouseManager.l?100:0) + (mouseManager.c?10:0) + (mouseManager.r?1:0) );
+        text( text, 0, 0 );
+      popMatrix();
+      */
+      
+      if ( mouseManager.l && mouseManager.r ) {
+        v = PVector.sub( cursor, pos ).normalize().mult( vmax ).add( PVector.sub( cursor, new PVector( allies.getUnits().get( 0 ).pos.x, allies.getUnits().get( 0 ).pos.y ) ).normalize().mult( vmax ) ).div( 2 );
+      } else if ( mouseManager.l ) {
+        v = PVector.sub( cursor, pos ).normalize().mult( vmax );
+      } else if ( mouseManager.r ) {
+        v = PVector.sub( cursor, new PVector( allies.getUnits().get( 0 ).pos.x, allies.getUnits().get( 0 ).pos.y ) ).normalize().mult( vmax );
+      } else {
+        return;
+      }
+      
+      color c = color( 0, 255, 255 );
       alliesShells.add( new Shell( pos, v, 5.0, c ) );
     }
   }
@@ -172,4 +201,12 @@ void keyPressed() {
 
 void keyReleased() {
   keyManager.disable( key );
+}
+
+void mousePressed() {
+  mouseManager.enable( mouseButton );
+}
+
+void mouseReleased() {
+  mouseManager.disable( mouseButton );
 }

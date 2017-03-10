@@ -65,7 +65,7 @@ class KeyManager {
     return new PVector( x, y ).normalize();
   }
   
-  public boolean isAnyPushed() {
+  public boolean isAnyPressed() {
     return w || a || s || d;
   }
 }
