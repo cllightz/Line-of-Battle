@@ -1,12 +1,16 @@
+import java.util.ArrayDeque;
+
 class AlliesLine {
   public ArrayList<Unit> units;
+  private ArrayDeque<Unit> queue;
   
   AlliesLine() {
     units = new ArrayList<Unit>();
+    queue = new ArrayDeque<Unit>();
   }
   
   public void addUnit( Unit u ) {
-    units.add( u );
+    queue.offer( u );
   }
   
   public void move( KeyManager keyManager ) {
@@ -18,6 +22,11 @@ class AlliesLine {
           units.get( i ).move( units.get( i - 1 ).getFollowPos() );
         }
       }
+    }
+      
+    if ( (units.isEmpty() || units.get( units.size() - 1 ).hasFollowPos()) && !queue.isEmpty() ) {
+      units.add( queue.peek() );
+      queue.poll();
     }
   }
   
